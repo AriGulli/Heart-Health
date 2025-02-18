@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Email</title>
+
+
+    <style>
+
+
+        body {
+
+            
+            background: linear-gradient(#fff, #dddddd);
+            min-height: 100vh;
+            box-sizing: border-box;
+
+        }
+
+        .newletter{
+
+            background: linear-gradient(#88ccff, #dddddd);
+            margin: 0 auto;
+            text-align: center;
+            max-width: 28%;
+            padding: 5% 3%;
+            border-radius: 3%;
+            color: #000000;
+            margin-top: 10%;
+            margin-bottom: 10%;
+             
+        }
+
+        .newletter hr{
+            width: 40%;
+            height: 3px;
+            margin: 10% auto;
+            border: 0;
+            background: rgba(0, 0, 0,0.5);
+            border-radius: 10%;
+        }
+
+        .newletter p{
+            font-size: 16px;
+            line-height: 120%;
+            color: rgba(0, 0, 0,0.8);
+            margin-bottom: 10%;
+        }
+
+        .newletter input{
+            border-radius: 3%;
+            background-color: rgba(255, 255, 255,0.4);
+            width: 100%;
+            height: 55px;
+            border: 0px;
+            padding: 0% 5%;
+            color: rgba(0, 0, 0,0.8);
+            margin-bottom: 10%;
+            outline: none;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        ::placeholder{
+            color: rgba(0, 0, 0,0.8);
+        }
+
+        .newletter button{
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            border-radius: 3%;
+            height: 50px;
+            background-color: transparent;
+            color: #000;
+            padding: 0% 6%;
+            cursor: pointer;
+            transition: 0.5s;
+            font-size: 16px;
+            margin-bottom: 10%;
+        }
+        .newletter button:hover{
+            background-color: #88ccff;
+            transform: scale(1.1);
+        }
+
+        .message {
+            text-align: center;
+            margin-bottom: 6%;
+            font-size: 24px;
+            color: rgb(0, 0, 0,0.8); /* default for error messages */
+        }
+        .success {
+            color: rgb(0, 0, 0,0.8); /* style for success messages */
+        }
+
+
+        /* Style the navigation bar */
+    .navbar {
+        height: 10vh; /* Set height of the navbar */
+        background-color: #ffffff; /* Set background color */
+        display: flex; /* Use flexbox */
+        align-items: center; /* Center items vertically */
+        justify-content: flex-start; /* Align items to the right */
+        position: relative; /* Make the navbar a positioning context */
+        margin-right: 2%; /* Add margin from the right */
+    }
+    
+    /* Style the links inside the navigation bar */
+    .navbar a {
+        text-decoration: none; /* Remove underline */
+        position: relative; /* Make the links positioning contexts */
+        font-size: 14px; /* Set font size for links */
+        margin-right: 2%;
+    }
+
+    /* Style for labels (such as "Home", "About", etc.) */
+    .navbar label {
+        color: black; /* Set default text color to white */
+        padding: 1% 40%; /* Add padding */
+        text-decoration: none; /* Remove underline */
+        font-size: 18px; /* Increase font size for labels */
+        margin-left: 2%; /* Add margin to the left of labels */
+        transition: color 0.3s ease; /* Add transition for color change */
+    }
+
+    /* Style the last label */
+    .navbar label:last-child {
+        margin-right: 3%; /* Add margin to the right of the last label */
+    }
+    
+    /* Change the color of labels on hover */
+    .navbar label:hover {
+        color: #13C5DD; /* Change text color on hover to #13C5DD */
+    }
+
+    /* Add underline on hover */
+    .navbar label::after {
+        content: ''; /* Add empty content */
+        display: block; /* Change to block element */
+        width: 100%; /* Full width */
+        height: 4%; /* Height of the underline */
+        background-color: #13C5DD; /* Color of the underline */
+        position: absolute; /* Position absolute */
+        bottom: -2%; /* Align slightly below the bottom */
+        left: 40%; /* Align at the left */
+        transform: scaleX(0); /* Initially, set to 0 width */
+        transition: transform 0.4s ease; /* Add transition for animation */
+    }
+
+    /* Animation for underline on hover */
+    .navbar label:hover::after {
+        transform: scaleX(1); /* Scale to full width */
+    }
+
+    .icon {
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .icon:hover {
+        transform: scale(1.2);
+        color: blueviolet;
+    }
+
+    #phoneNumber {
+    visibility: hidden; 
+    color: #2b2e2e;
+    transition: visibility 0.3s linear;
+}
+
+#hr{
+    background-color: #13C5DD;
+    width: 80%;
+}
+            
+
+
+    </style>
+
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="/home" style="display: inline-block; margin-left: 2%;">
+            <img src="static/img/logo.png" alt="logo" style="width: 18%;">
+        </a>
+        <a href="/home"><label>Home</label></a>
+        <a href="/prediction"><label>Prediction</label></a>
+        <a href="/submit_email"><label>Subscription</label></a> 
+    </div>
+    <hr id="hr">
+
+
+    <div class="newletter">
+        
+        <h1>Get Newsletter</h1>
+        <hr>
+        <p>Enter your email in the box below to receive layest news and information about our activities</p>
+        <form method="post" action="/submit_email">
+            <input type="email" name="email" placeholder="Email" required>
+            <button type="submit">Submit Now</button>
+            <div class="message">
+                {% if message %}
+                    <span class="{{ 'success' if message_type == 'success' else 'error' }}">{{ message }}</span>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+    <footer style="background: linear-gradient(to bottom, #dddddd, #88ccff); padding: 3%;">
+        <div style="max-width: 100%; margin: 0% auto; text-align: center;">
+            <div style="display: flex; justify-content: space-between;">
+                <div style="flex: 1; margin-right: 2%;">
+                    <h1 style="color: rgb(43, 46, 46); margin-bottom: 5%;"><span style="color:blueviolet;">|</span>&nbsp;&nbsp;&nbsp;Pages</h1>
+                    <nav style="text-align: justify; margin-left: 38%;">
+                        <a href="/home" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -12%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</p></a> <br>
+                        <a href="/prediction" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -12%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prediction</p></a> <br>
+                        <a href="/submit_email" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -12%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subscription</p></a> <br>
+                    </nav>
+                </div>
+                <div style="flex: 1; margin-right: 2%;">
+                    <h1 style="color: rgb(43, 46, 46); margin-bottom: 5%;"><span style="color:blueviolet;">|</span>&nbsp;&nbsp;&nbsp;Contact Us</h1>
+                    <nav style="text-align: justify; margin-left: 29%;">
+                        <a  href="mailto:ari.krd4@gmail.com" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -10%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email</p></a> <br>
+                        <a href="#" style="color: rgb(43, 46, 46); text-decoration: none;" 
+       onmouseenter="showPhoneNumber(true)" 
+       onmouseleave="showPhoneNumber(false)">
+        <p class="icon" style="margin-bottom: -2%; transform-origin: left center;">
+            <span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone
+        </p>
+    </a><br>
+    <div id="phoneNumber" style="color: rgb(43, 46, 46);"><b>0750 340 0254</b></div>
+    
+    
+                    </nav>
+                </div>
+                <div style="flex: 1;">
+                    <h1 style="color: rgb(43, 46, 46); margin-bottom: 5%;"><span style="color:blueviolet;">|</span>&nbsp;&nbsp;&nbsp;Follow Us</h1>
+                    <div>
+                        <a href="https://www.instagram.com/ariikrd?igsh=MzRlODBiNWFlZA=="><img src="static\img\instaIcon.png" class="icon" style="width: 12%; margin-right: 3%; margin-left: 4%;"></a>
+                        <a href="http://t.me/AriGulli"><img src="static\img\telegramIcon.png" class="icon" style="width: 12%; margin-right: 3%;"></a>
+                        <a href="https://wa.me/qr/SLFHK4MVUFGCD1"><img src="static\img\whatsappIcon.png" class="icon" style="width: 12%;"></a>
+                    </div>
+                </div>
+            </div>
+            <hr style="margin-top: 0%; border: 0%; border-top: 2px solid blueviolet; width: 30%; margin-left: auto; margin-right: 0%;">
+            <p style="margin-top: 1%; margin-left: 70%;">&copy; 2024 Heart Health. All Rights Reserved.</p>
+    
+        </div>
+    </footer>
+
+
+
+    <script>
+        function showPhoneNumber(show) {
+            var phoneNumberDiv = document.getElementById('phoneNumber');
+            phoneNumberDiv.style.visibility = show ? 'visible' : 'hidden'; // Toggle visibility
+        }
+        </script>
+
+    
+</body>
+</html>

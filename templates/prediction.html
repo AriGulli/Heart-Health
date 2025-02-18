@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pridection Page</title>
+    <link rel="icon" href="static\img\logoIcon.png" type="image/x-icon">
+    <style>
+        /* Style the navigation bar */
+    .navbar {
+        height: 10vh; /* Set height of the navbar */
+        background-color: #ffffff; /* Set background color */
+        display: flex; /* Use flexbox */
+        align-items: center; /* Center items vertically */
+        justify-content: flex-start; /* Align items to the right */
+        position: relative; /* Make the navbar a positioning context */
+        margin-right: 2%; /* Add margin from the right */
+    }
+    
+    /* Style the links inside the navigation bar */
+    .navbar a {
+        text-decoration: none; /* Remove underline */
+        position: relative; /* Make the links positioning contexts */
+        font-size: 14px; /* Set font size for links */
+        margin-right: 2%;
+    }
+
+    /* Style for labels (such as "Home", "About", etc.) */
+    .navbar label {
+        color: black; /* Set default text color to white */
+        padding: 1% 40%; /* Add padding */
+        text-decoration: none; /* Remove underline */
+        font-size: 18px; /* Increase font size for labels */
+        margin-left: 2%; /* Add margin to the left of labels */
+        transition: color 0.3s ease; /* Add transition for color change */
+    }
+
+    /* Style the last label */
+    .navbar label:last-child {
+        margin-right: 3%; /* Add margin to the right of the last label */
+    }
+    
+    /* Change the color of labels on hover */
+    .navbar label:hover {
+        color: #13C5DD; /* Change text color on hover to #13C5DD */
+    }
+
+    /* Add underline on hover */
+    .navbar label::after {
+        content: ''; /* Add empty content */
+        display: block; /* Change to block element */
+        width: 100%; /* Full width */
+        height: 4%; /* Height of the underline */
+        background-color: #13C5DD; /* Color of the underline */
+        position: absolute; /* Position absolute */
+        bottom: -2%; /* Align slightly below the bottom */
+        left: 40%; /* Align at the left */
+        transform: scaleX(0); /* Initially, set to 0 width */
+        transition: transform 0.4s ease; /* Add transition for animation */
+    }
+
+    /* Animation for underline on hover */
+    .navbar label:hover::after {
+        transform: scaleX(1); /* Scale to full width */
+    }
+
+        /* Style for the container of background image */
+        .background-image-container {
+            background-image: url('static\\img\\new.png'); /* Set background image */
+            background-size: cover; /* Cover the entire container */
+            background-position: center top; /* Position the background image at the center top */
+            height: calc(77vh + -40px); /* Set height to half of the viewport height plus the navbar height */
+            position: relative; /* Make the container a positioning context */
+        }
+
+        /* Style for the headline container */
+        .headline-container {
+            position: absolute; /* Position absolutely */
+            top: 50%; /* Align to the middle vertically */
+            left: 58%; /* Align to the middle horizontally */
+            transform: translate(-50%, -50%); /* Move back 50% of its own width and height */
+            text-align: center; /* Center the text */
+            color: rgb(43, 46, 46);; /* Set text color */
+        }
+
+        /* Style for the headline */
+        .headline {
+            font-size: 40px; /* Font size */
+            font-weight: bold; /* Font weight */
+            margin-bottom: 5%; /* Add margin to the bottom */
+        }
+
+        /* Style for the form */
+        form {
+            display: grid; /* Use grid layout */
+            grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+            grid-gap: 10px; /* Gap between grid items */
+        }
+
+        /* Style for form labels */
+        form label {
+            grid-column: span 3; /* Span all three columns */
+        }
+
+        /* Style for form inputs */
+        form input, form select {
+            width: calc(100% - 10px); /* Set width to fill grid cell */
+            grid-column: span 2; /* Span two columns */
+            height: 55%; /* Set height */
+            border-radius: 20px; /* Round the corners */
+            padding: 1.4%; /* Add padding */
+            border-color: #13C5DD; /* Add color */
+            transition: transform 0.3s ease; /* Add transition for animation */
+        }
+        /* Pop-up animation when input is focused */
+        .form-inputs input:focus,
+        .form-inputs select:focus {
+            transform: scale(1.02); /* Increase scale on focus */
+        }
+
+        /* Style for form inputs container */
+        .form-inputs {
+            display: flex; /* Use flexbox */
+            flex-wrap: wrap; /* Allow wrapping */
+            align-content: center; /* Center form inputs vertically */
+            width: 300%; /* Set the width */
+            height: 100px; /* Set the height */
+        }
+
+        /* Style for form input items */
+        .form-input-item {
+            flex: 1 1 30%; /* Each item takes one-third of the space with some margin */
+            margin-bottom: 2%;
+            margin-right: 5%;
+            text-align: center;
+            color: rgb(43, 46, 46);
+        }
+
+        /* Adjust margin for the last item */
+        .form-input-item:last-child {
+            margin-right: 0%; /* Remove right margin for the last item */
+        }
+
+        .icon {
+        transition: transform 0.2s ease-in-out;
+        }
+
+        .icon:hover {
+            transform: scale(1.2);
+            color: blueviolet;
+        }
+
+        #phoneNumber {
+    visibility: hidden; 
+    color: #2b2e2e;
+    transition: visibility 0.3s linear;
+}
+            
+
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="/home" style="display: inline-block; margin-left: 2%;">
+            <img src="static/img/logo.png" alt="logo" style="width: 18%;">
+        </a>
+        <a href="/home"><label>Home</label></a>
+        <a href="/prediction"><label>Prediction</label></a>
+        <a href="/submit_email"><label>Subscription</label></a> 
+    </div>
+
+<div class="background-image-container">
+    <div class="headline-container">
+        <div class="headline">Measuring heart disease prediction using machine learning</div>
+    </div>
+</div>
+
+<form action="{{ url_for('prediction') }}" method="post">
+    <div class="form-wrapper">
+        <div class="form-inputs">
+            <div class="form-input-item">
+                <label for="Age">Age</label>
+                <input type="number" id="age" name="Age" required>
+            </div>
+            <div class="form-input-item">
+                <label for="gender">Gender</label>
+                <select id="gender" name="Sex" required>
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                </select>
+            </div> 
+            <div class="form-input-item">
+                <label for="chest_pain">Chest Pain Type</label>
+                <input type="number" id="chest_pain" name="Chest Pain Type" required>
+            </div>
+        </div>
+        
+        <div class="form-inputs">
+            <div class="form-input-item">
+                <label for="resting_blood_pressure">Resting Blood Pressure</label>
+                <input type="number" id="resting_blood_pressure" name="Resting Blood Pressure" required>
+            </div>
+            <div class="form-input-item">
+                <label for="cholesterol">Cholesterol</label>
+                <input type="number" id="cholesterol" name="Cholesterol" required>
+            </div> 
+            <div class="form-input-item">
+                <label for="fasting_blood_sugar">Fasting Blood Sugar</label>
+                <select id="fasting_blood_sugar" name="Fasting Blood Sugar" required>
+                    <option value="1">True</option>
+                    <option value="0">False</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-inputs">
+            <div class="form-input-item">
+                <label for="rest_ecg">Rest ECG</label>
+                <input type="number" id="rest_ecg" name="Rest ECG" required>
+            </div>
+            <div class="form-input-item">
+                <label for="max_heart_rate_achieved">Max Heart Rate Achieved</label>
+                <input type="number" id="max_heart_rate_achieved" name="Max Heart Rate Achieved" required>
+            </div> 
+            <div class="form-input-item">
+                <label for="exercise_induced_angina">Exercise Induced Angina</label>
+                <select id="exercise_induced_angina" name="Exercise Induced Angina" required>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-inputs">
+            <div class="form-input-item">
+                <label for="st_depression">ST Depression</label>
+                <input type="number" id="st_depression" name="ST Depression" min="0" max="10" step="0.01" required>
+            </div>
+            <div class="form-input-item">
+                <label for="st_slope">ST Slope</label>
+                <input type="number" id="st_slope" name="ST Slope" required>
+            </div> 
+            <div class="form-input-item">
+                <label for="num_major_vessels">Num Major Vessels</label>
+                <input type="number" id="num_major_vessels" name="Num Major Vessels" required>            
+            </div>
+        </div>
+
+        <div class="form-inputs">
+            <div class="form-input-item" style="text-align: center;">
+                <label for="thalassemia">Thalassemia<br></label>
+                <input type="number" id="thalassemia" name="Thalassemia" required style="width: 60%;">
+            </div>
+            <div class="form-input-item">
+                <label><br></label>
+                <input type="submit" value="Predict">
+            </div>
+            <!--<div class="form-input-item">
+                <b><br><br></b>
+                <a href="report">
+                    <input type="button" value="Predict">
+                </a>
+                
+            </div>-->
+        </div>
+    </div>
+</form>
+
+<footer style="background: linear-gradient(to bottom, #dddddd, #88ccff); padding: 3%;">
+    <div style="max-width: 100%; margin: 0% auto; text-align: center;">
+        <div style="display: flex; justify-content: space-between;">
+            <div style="flex: 1; margin-right: 2%;">
+                <h1 style="color: rgb(43, 46, 46); margin-bottom: 5%;"><span style="color:blueviolet;">|</span>&nbsp;&nbsp;&nbsp;Pages</h1>
+                <nav style="text-align: justify; margin-left: 38%;">
+                    <a href="/home" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -12%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</p></a> <br>
+                    <a href="/prediction" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -12%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prediction</p></a> <br>
+                    <a href="/submit_email" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -12%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subscription</p></a> <br>
+                </nav>
+            </div>
+            <div style="flex: 1; margin-right: 2%;">
+                <h1 style="color: rgb(43, 46, 46); margin-bottom: 5%;"><span style="color:blueviolet;">|</span>&nbsp;&nbsp;&nbsp;Contact Us</h1>
+                <nav style="text-align: justify; margin-left: 29%;">
+                    <a  href="mailto:ari.krd4@gmail.com" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -10%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email</p></a> <br>
+                    <a href="#" style="color: rgb(43, 46, 46); text-decoration: none;" 
+   onmouseenter="showPhoneNumber(true)" 
+   onmouseleave="showPhoneNumber(false)">
+    <p class="icon" style="margin-bottom: -2%; transform-origin: left center;">
+        <span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone
+    </p>
+</a><br>
+<div id="phoneNumber" style="color: rgb(43, 46, 46);"><b>0750 340 0254</b></div>
+
+
+                </nav>
+            </div>
+            <div style="flex: 1;">
+                <h1 style="color: rgb(43, 46, 46); margin-bottom: 5%;"><span style="color:blueviolet;">|</span>&nbsp;&nbsp;&nbsp;Follow Us</h1>
+                <div>
+                    <a href="https://www.instagram.com/ariikrd?igsh=MzRlODBiNWFlZA=="><img src="static\img\instaIcon.png" class="icon" style="width: 12%; margin-right: 3%; margin-left: 4%;"></a>
+                    <a href="http://t.me/AriGulli"><img src="static\img\telegramIcon.png" class="icon" style="width: 12%; margin-right: 3%;"></a>
+                    <a href="https://wa.me/qr/SLFHK4MVUFGCD1"><img src="static\img\whatsappIcon.png" class="icon" style="width: 12%;"></a>
+                </div>
+            </div>
+        </div>
+        <hr style="margin-top: 0%; border: 0%; border-top: 2px solid blueviolet; width: 30%; margin-left: auto; margin-right: 0%;">
+        <p style="margin-top: 1%; margin-left: 70%;">&copy; 2024 Heart Health. All Rights Reserved.</p>
+
+    </div>
+</footer>
+
+<script>
+    function showPhoneNumber(show) {
+        var phoneNumberDiv = document.getElementById('phoneNumber');
+        phoneNumberDiv.style.visibility = show ? 'visible' : 'hidden'; // Toggle visibility
+    }
+    </script>
+
+</body>
+</html>

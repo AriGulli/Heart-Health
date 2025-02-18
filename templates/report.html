@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        /* Style the navigation bar */
+    .navbar {
+        height: 10vh; /* Set height of the navbar */
+        background-color: #ffffff; /* Set background color */
+        display: flex; /* Use flexbox */
+        align-items: center; /* Center items vertically */
+        justify-content: flex-start; /* Align items to the right */
+        position: relative; /* Make the navbar a positioning context */
+        margin-right: 2%; /* Add margin from the right */
+    }
+    
+    /* Style the links inside the navigation bar */
+    .navbar a {
+        text-decoration: none; /* Remove underline */
+        position: relative; /* Make the links positioning contexts */
+        font-size: 14px; /* Set font size for links */
+        margin-right: 2%;
+    }
+
+    /* Style for labels (such as "Home", "About", etc.) */
+    .navbar label {
+        color: black; /* Set default text color to white */
+        padding: 1% 40%; /* Add padding */
+        text-decoration: none; /* Remove underline */
+        font-size: 18px; /* Increase font size for labels */
+        margin-left: 2%; /* Add margin to the left of labels */
+        transition: color 0.3s ease; /* Add transition for color change */
+    }
+
+    /* Style the last label */
+    .navbar label:last-child {
+        margin-right: 3%; /* Add margin to the right of the last label */
+    }
+    
+    /* Change the color of labels on hover */
+    .navbar label:hover {
+        color: #13C5DD; /* Change text color on hover to #13C5DD */
+    }
+
+    /* Add underline on hover */
+    .navbar label::after {
+        content: ''; /* Add empty content */
+        display: block; /* Change to block element */
+        width: 100%; /* Full width */
+        height: 4%; /* Height of the underline */
+        background-color: #13C5DD; /* Color of the underline */
+        position: absolute; /* Position absolute */
+        bottom: -2%; /* Align slightly below the bottom */
+        left: 40%; /* Align at the left */
+        transform: scaleX(0); /* Initially, set to 0 width */
+        transition: transform 0.4s ease; /* Add transition for animation */
+    }
+
+    /* Animation for underline on hover */
+    .navbar label:hover::after {
+        transform: scaleX(1); /* Scale to full width */
+    }
+
+
+
+
+
+        .icon {
+        transition: transform 0.2s ease-in-out;
+        }
+
+        .icon:hover {
+            transform: scale(1.2);
+            color: blueviolet;
+        }
+
+        #phoneNumber {
+    visibility: hidden; 
+    color: #2b2e2e;
+    transition: visibility 0.3s linear;
+}
+
+/* Style for the container of background image */
+.background-image-container {
+            background-image: url('static\\img\\heart.jpg'); /* Set background image */
+            background-size: cover; /* Cover the entire container */
+            background-position: center top; /* Position the background image at the center top */
+            height: calc(77vh + -100px); /* Set height to half of the viewport height plus the navbar height */
+            position: relative; /* Make the container a positioning context */
+        }
+
+         /* Style for the headline container */
+         .headline-container {
+            position: absolute; /* Position absolutely */
+            top: 50%; /* Align to the middle vertically */
+            left: 58%; /* Align to the middle horizontally */
+            transform: translate(-50%, -50%); /* Move back 50% of its own width and height */
+            text-align: center; /* Center the text */
+            color: rgb(43, 46, 46);; /* Set text color */
+        }
+
+        /* Style for the headline */
+        .headline {
+            font-size: 40px; /* Font size */
+            font-weight: bold; /* Font weight */
+            margin-bottom: 2%; /* Add margin to the bottom */
+        }
+
+        .centered-text {
+        text-align: center;
+        margin: 0%;
+        padding: 2%;
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        max-width: 45%;
+        margin: auto;
+        margin-top: 50px;
+    }
+
+    /* Style for form input items */
+    .form-input-item {
+            flex: 1 1 30%; /* Each item takes one-third of the space with some margin */
+            margin-bottom: 5%;
+            margin-right: 2%;
+            text-align: center;
+            color: rgb(43, 46, 46);
+        }
+
+        /* Adjust margin for the last item */
+        .form-input-item:last-child {
+            margin-right: 0%; /* Remove right margin for the last item */
+        }
+
+    .styled-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        color: #ffffff;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: 0.3s;
+    }
+
+    .styled-button:hover {
+        background-color: #1e71c9;
+        transform: scale(1.1);
+    }
+
+    </style>
+
+</head>
+<body>
+    
+    <div class="navbar">
+        <a href="/home" style="display: inline-block; margin-left: 2%;">
+            <img src="static/img/logo.png" alt="logo" style="width: 18%;">
+        </a>
+        <a href="/home"><label>Home</label></a>
+        <a href="/prediction"><label>Prediction</label></a>
+        <a href="/submit_email"><label>Subscription</label></a> 
+    </div>
+
+
+
+    <div class="background-image-container">
+        <div class="headline-container">
+            <div class="headline"></div>
+        </div>
+    </div>
+
+
+
+
+
+    <h1 style="text-align: center;">Prediction Report</h1>
+    
+    <div class="centered-text">
+        <p>After looking at the information you provided, we found that the result is:</p>
+        <h3>{{ data['prediction'] }}</h3>
+    </div>
+
+
+
+    <div class="form-input-item">
+        <b><br><br></b>
+        <a href="/prediction">
+            <input class="styled-button" type="button" value="Return to Prediction page">
+        </a>
+        
+    </div>
+    
+
+
+
+
+
+
+    <footer style="background: linear-gradient(to bottom, #dddddd, #88ccff); padding: 3%;">
+        <div style="max-width: 100%; margin: 0% auto; text-align: center;">
+            <div style="display: flex; justify-content: space-between;">
+                <div style="flex: 1; margin-right: 2%;">
+                    <h1 style="color: rgb(43, 46, 46); margin-bottom: 5%;"><span style="color:blueviolet;">|</span>&nbsp;&nbsp;&nbsp;Pages</h1>
+                    <nav style="text-align: justify; margin-left: 38%;">
+                        <a href="/home" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -12%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</p></a> <br>
+                        <a href="/prediction" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -12%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prediction</p></a> <br>
+                        <a href="/submit_email" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -12%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subscription</p></a> <br>
+                    </nav>
+                </div>
+                <div style="flex: 1; margin-right: 2%;">
+                    <h1 style="color: rgb(43, 46, 46); margin-bottom: 5%;"><span style="color:blueviolet;">|</span>&nbsp;&nbsp;&nbsp;Contact Us</h1>
+                    <nav style="text-align: justify; margin-left: 29%;">
+                        <a  href="mailto:ari.krd4@gmail.com" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -10%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email</p></a> <br>
+                        <a href="#" style="color: rgb(43, 46, 46); text-decoration: none;" 
+       onmouseenter="showPhoneNumber(true)" 
+       onmouseleave="showPhoneNumber(false)">
+        <p class="icon" style="margin-bottom: -2%; transform-origin: left center;">
+            <span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone
+        </p>
+    </a><br>
+    <div id="phoneNumber" style="color: rgb(43, 46, 46);"><b>0750 340 0254</b></div>
+    
+    
+                    </nav>
+                </div>
+                <div style="flex: 1;">
+                    <h1 style="color: rgb(43, 46, 46); margin-bottom: 5%;"><span style="color:blueviolet;">|</span>&nbsp;&nbsp;&nbsp;Follow Us</h1>
+                    <div>
+                        <a href="https://www.instagram.com/ariikrd?igsh=MzRlODBiNWFlZA=="><img src="static\img\instaIcon.png" class="icon" style="width: 12%; margin-right: 3%; margin-left: 4%;"></a>
+                        <a href="http://t.me/AriGulli"><img src="static\img\telegramIcon.png" class="icon" style="width: 12%; margin-right: 3%;"></a>
+                        <a href="https://wa.me/qr/SLFHK4MVUFGCD1"><img src="static\img\whatsappIcon.png" class="icon" style="width: 12%;"></a>
+                    </div>
+                </div>
+            </div>
+            <hr style="margin-top: 0%; border: 0%; border-top: 2px solid blueviolet; width: 30%; margin-left: auto; margin-right: 0%;">
+            <p style="margin-top: 1%; margin-left: 70%;">&copy; 2024 Heart Health. All Rights Reserved.</p>
+    
+        </div>
+    </footer>
+
+    <script>
+        function showPhoneNumber(show) {
+            var phoneNumberDiv = document.getElementById('phoneNumber');
+            phoneNumberDiv.style.visibility = show ? 'visible' : 'hidden'; // Toggle visibility
+        }
+        </script>
+
+</body>
+</html>

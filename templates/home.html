@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Disease Prediction</title>
+<link rel="icon" href="static\img\logoIcon.png" type="image/x-icon">
+
+<style>
+    /* Style the navigation bar */
+    .navbar {
+        height: 10vh; /* Set height of the navbar */
+        background-color: #ffffff; /* Set background color */
+        display: flex; /* Use flexbox */
+        align-items: center; /* Center items vertically */
+        justify-content: flex-start; /* Align items to the right */
+        position: relative; /* Make the navbar a positioning context */
+        margin-right: 2%; /* Add margin from the right */
+    }
+    
+    /* Style the links inside the navigation bar */
+    .navbar a {
+        text-decoration: none; /* Remove underline */
+        position: relative; /* Make the links positioning contexts */
+        font-size: 14px; /* Set font size for links */
+        margin-right: 2%;
+    }
+
+    /* Style for labels (such as "Home", "About", etc.) */
+    .navbar label {
+        color: black; /* Set default text color to white */
+        padding: 1% 40%; /* Add padding */
+        text-decoration: none; /* Remove underline */
+        font-size: 18px; /* Increase font size for labels */
+        margin-left: 2%; /* Add margin to the left of labels */
+        transition: color 0.3s ease; /* Add transition for color change */
+    }
+
+    /* Style the last label */
+    .navbar label:last-child {
+        margin-right: 3%; /* Add margin to the right of the last label */
+    }
+    
+    /* Change the color of labels on hover */
+    .navbar label:hover {
+        color: #13C5DD; /* Change text color on hover to #13C5DD */
+    }
+
+    /* Add underline on hover */
+    .navbar label::after {
+        content: ''; /* Add empty content */
+        display: block; /* Change to block element */
+        width: 100%; /* Full width */
+        height: 4%; /* Height of the underline */
+        background-color: #13C5DD; /* Color of the underline */
+        position: absolute; /* Position absolute */
+        bottom: -2%; /* Align slightly below the bottom */
+        left: 40%; /* Align at the left */
+        transform: scaleX(0); /* Initially, set to 0 width */
+        transition: transform 0.4s ease; /* Add transition for animation */
+    }
+
+    /* Animation for underline on hover */
+    .navbar label:hover::after {
+        transform: scaleX(1); /* Scale to full width */
+    }
+
+    /* Style for the container of background image */
+    .background-image-container {
+        background-image: url('static\\img\\homeHealth.jpg'); /* Set background image */
+        background-size: cover; /* Cover the entire container */
+        background-position: center top; /* Position the background image at the center top */
+        height: calc(77vh + 30px); /* Set height to half of the viewport height plus the navbar height */
+        position: relative; /* Make the container a positioning context */
+    }
+
+    /* Style for the headline container */
+    .headline-container {
+        position: absolute; /* Position the container absolutely */
+        top: 35%; /* Align at the middle vertically */
+        left: 54%; /* Align at the middle horizontally */
+        transform: translate(-50%, -50%); /* Center the container */
+        padding: 2%; /* Add padding */
+        color: rgb(0, 0, 0); /* Text color */
+        text-align: center; /* Center align the text */
+    }
+
+    /* Style for the headline */
+    .headline {
+        font-size: 48px; /* Font size */
+        font-weight: bold; /* Font weight */
+        margin-bottom: 2%; /* Add margin to the bottom */
+    }
+
+    /* Style for the info */
+    .info {
+        font-size: 24px; /* Font size */
+    }
+
+    /* Style for the image container */
+    .container1 {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 15%; /* Adjust as needed */
+        padding-top: 10%; /* Adjust as needed */
+        padding-bottom: 8%; /* Adjust as needed */
+    }
+
+    /* Style for the image */
+    .container1 img {
+        max-width: 30%;
+        height: auto;
+        border-radius: 10%;
+        border-bottom-left-radius: 55%;
+    }
+
+    .container2 {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 15%; /* Adjust as needed */
+        padding-bottom: 8%; /* Adjust as needed */
+    }
+
+    /* Style for the image */
+    .container2 img {
+        max-width: 30%;
+        height: auto;
+        border-radius: 10%;
+        border-bottom-right-radius: 55%;
+    }
+
+    /* Style for the information text */
+    .info-text1 {
+        position: absolute;
+        top: 20%;
+        left: 5%;
+        padding: 2%;
+        border-radius: 1%;
+        max-width: 50%;
+        font-size: 20px;
+        text-align: left;
+    }
+
+    .info-text2 {
+        margin-top: 40px;
+        top: 20%;
+        left: 5%;
+        padding: 2%;
+        border-radius: 1%;
+        max-width: 50%;
+        font-size: 20px;
+        text-align: left;
+    }
+
+    .icon {
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .icon:hover {
+        transform: scale(1.2);
+        color: blueviolet;
+    }
+
+    #phoneNumber {
+    visibility: hidden; 
+    color: #2b2e2e;
+    transition: visibility 0.3s linear;
+}
+
+/* Style adjustments for a modern rounded input field */
+#mail {
+        margin-top: 20px;
+        border-radius: 20px;  /* More pronounced rounded corners */
+        padding: 10px 20px;  /* Balanced padding for aesthetics */
+        border: 1px solid #dddddd;  /* Light gray border as specified */
+        background-color: #ffffff;  /* White background for contrast */
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+        font-size: 16px;  /* Larger font size for better readability */
+        color: #333333;  /* Darker text color for better contrast */
+        outline: none;  /* Remove default focus outline */
+        transition: all 0.3s ease;  /* Smooth transition for interactions */
+    }
+
+    #mail:focus {
+        border-color: #88ccff;  /* Highlight color when focused */
+        box-shadow: 0 0 8px #88ccff;  /* Glowing effect on focus */
+        transform: scale(1.1);  /* Scale up to pop out */
+    }
+
+
+
+
+
+    
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="/home" style="display: inline-block; margin-left: 2%;">
+        <img src="static/img/logo.png" alt="logo" style="width: 18%;">
+    </a>
+    <a href="/home"><label>Home</label></a>
+    <a href="/prediction"><label>Prediction</label></a>
+    <a href="/submit_email"><label>Subscription</label></a> 
+</div>
+
+<!-- Container for the background image -->
+<div class="background-image-container">
+    <!-- Headline container -->
+    <div class="headline-container">
+        <div class="headline">Welcome to Heart Health</div>
+        <div class="info"><br>Easiest way to predict Heart Disease</div>
+    </div>
+</div>
+
+<!-- Image section -->
+<div class="container1">
+    <img src="static\img\about.png" alt="First Image">
+    <div class="info-text1">
+        <h2 style="color: #0d717e;"><u>About Us</u></h2>
+        <p style="color: rgb(43, 46, 46); text-align: justify;">The innovative website uses advanced algorithms and a thorough analysis of health data to accurately predict who might be at risk of heart diseases. This is a big step forward in preventive healthcare. By gathering a lot of detailed health information for each user, the website can make personalized predictions. It processes this information quickly and is easy to use, helping people manage their health better. This tool not only spots potential health issues but also gives users clear advice on what to do next, greatly improving preventive care and making it easier for everyone to stay healthy.
+
+
+
+
+
+        </p>
+    </div>
+</div>
+
+<div class="container2">
+    <img src="static\img\login.jpg" alt="First Image">
+    <div class="info-text2">
+        <h2 style="color: #0d717e;"><u>Why you should Register with us?</u></h2>
+        <p style="color: rgb(43, 46, 46); text-align: justify;">You will get notified if anything changed or new things added to the website, this will help you to get awared for every thing in the website. you can register by <a href="/submit_email">clicking here</a> or login on the top right corner in navigation bar.</p>
+    </div>
+</div>
+
+<footer style="background: linear-gradient(to bottom, #dddddd, #88ccff); padding: 3%;">
+    <div style="max-width: 100%; margin: 0% auto; text-align: center;">
+        <div style="display: flex; justify-content: space-between;">
+            <div style="flex: 1; margin-right: 2%;">
+                <h1 style="color: rgb(43, 46, 46); margin-bottom: 5%;"><span style="color:blueviolet;">|</span>&nbsp;&nbsp;&nbsp;Pages</h1>
+                <nav style="text-align: justify; margin-left: 38%;">
+                    <a href="/home" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -12%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</p></a> <br>
+                    <a href="/prediction" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -12%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prediction</p></a> <br>
+                    <a href="/submit_email" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -12%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subscription</p></a> <br>
+                </nav>
+            </div>
+            <div style="flex: 1; margin-right: 2%;">
+                <h1 style="color: rgb(43, 46, 46); margin-bottom: 5%;"><span style="color:blueviolet;">|</span>&nbsp;&nbsp;&nbsp;Contact Us</h1>
+                <nav style="text-align: justify; margin-left: 29%;">
+                    <a  href="mailto:ari.krd4@gmail.com" style="color: rgb(43, 46, 46); text-decoration: none;"><p class="icon" style="margin-bottom: -10%; transform-origin: left center;"><span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email</p></a> <br>
+                    <a href="#" style="color: rgb(43, 46, 46); text-decoration: none;" 
+   onmouseenter="showPhoneNumber(true)" 
+   onmouseleave="showPhoneNumber(false)">
+    <p class="icon" style="margin-bottom: -2%; transform-origin: left center;">
+        <span style="color:blueviolet;">></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone
+    </p>
+</a><br>
+<div id="phoneNumber" style="color: rgb(43, 46, 46);"><b>0750 340 0254</b></div>
+
+
+                </nav>
+            </div>
+            <div style="flex: 1;">
+                <h1 style="color: rgb(43, 46, 46); margin-bottom: 5%;"><span style="color:blueviolet;">|</span>&nbsp;&nbsp;&nbsp;Follow Us</h1>
+                <div>
+                    <a href="https://www.instagram.com/ariikrd?igsh=MzRlODBiNWFlZA=="><img src="static\img\instaIcon.png" class="icon" style="width: 12%; margin-right: 3%; margin-left: 4%;"></a>
+                    <a href="http://t.me/AriGulli"><img src="static\img\telegramIcon.png" class="icon" style="width: 12%; margin-right: 3%;"></a>
+                    <a href="https://wa.me/qr/SLFHK4MVUFGCD1"><img src="static\img\whatsappIcon.png" class="icon" style="width: 12%;"></a>
+                </div>
+            </div>
+        </div>
+        <hr style="margin-top: 0%; border: 0%; border-top: 2px solid blueviolet; width: 30%; margin-left: auto; margin-right: 0%;">
+        <p style="margin-top: 1%; margin-left: 70%;">&copy; 2024 Heart Health. All Rights Reserved.</p>
+
+    </div>
+</footer>
+
+
+
+
+<script>
+    function showPhoneNumber(show) {
+        var phoneNumberDiv = document.getElementById('phoneNumber');
+        phoneNumberDiv.style.visibility = show ? 'visible' : 'hidden'; // Toggle visibility
+    }
+    </script>
+    
+    
+
+</body>
+</html>
